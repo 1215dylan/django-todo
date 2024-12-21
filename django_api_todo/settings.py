@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--%&(x4zd#+yz7c6=dpb&3*k&*t1%tqw41!)cowr(*gn@80045p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+load_dotenv()
+DEBUG = os.getenv('my_debug') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] if DEBUG else [os.getenv('my_host')]
 
 CORS_ALLOWED_ORIGINS=["http://127.0.0.1:5500"]
 
